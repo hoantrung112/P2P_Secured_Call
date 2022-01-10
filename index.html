@@ -20,10 +20,15 @@
         .vid-frame {
             border: #9933CC solid 2px;
             border-radius: 5%;
-            background-color:whitesmoke;
+            background-color: whitesmoke;
         }
+
         .tooltip-btn {
-            border-radius: 10px;;
+            border-radius: 10px;            
+        }
+
+        .bdr-8 {
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -32,8 +37,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="index.html">
-            <img src="public\img\call_lock.png" width="30" height="30" class="d-inline-block align-top ml-4" alt="">
-            &nbsp;&nbsp;SecuredCall
+            <i class="fas fa-phone-volume"></i>
+            <i class="fas fa-lock"></i>
+            &nbsp;&nbsp;P2P Call
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,24 +49,36 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="groupCall.html">Group Call</a>
+                    <a class="nav-link" href="about.html">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link" href="groupCall.html">Group Call</a>
                 </li>
             </ul>
         </div>
     </nav>
-
+    <div class="text-center">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 pb-4" style="color: #9933CC;"><i class="fas fa-fingerprint"></i>&nbsp;&nbsp;Your
+                    secret connection ID</h1>
+                <p id="peer-id-label" class="lead">Generating...</p>
+                <button id="regenID" class="btn btn-primary bdr-8 mt-3">
+                    <span><i class="fas fa-undo-alt"></i>&nbsp;&nbsp; Regenerate</span></button>
+            </div>
+        </div>
+        <br>
+    </div>
     <div class="jumbotron">
         <div class="row mb-4">
-            <div class="col-md-4 col-lg-6 mt-4">
+            <div class="col-md-4 col-lg-6">
                 <div class="text-center pt-4">
                     <video id="my-camera" width="700" height="400" autoplay playsinline muted="true"
                         class="center-block vid-frame">
                     </video>
                     <!--Use playsinline to play video on safari-->
-                    <h3 class="py-3"><span class="badge badge-secondary px-4 py-2" style="border-radius: 10px;" id="connector_peer">You</span></h3>
+                    <h3 class="py-3"><span class="badge badge-primary px-4 py-2" style="border-radius: 10px;"
+                            id="connector_peer">You</span></h3>
                     <div id="toolbar" class="d-flex flex-wrap justify-content-center">
                         <button type="button" class="btn btn-info mx-1 my-1 tooltip-btn" data-toggle="tooltip"
                             data-placement="left" title="" data-original-title="Tooltip on left" id="micToggle"
@@ -76,37 +94,39 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-lg-6 mt-4">
+            <div class="col-md-4 col-lg-6">
                 <!-- Display video of the connected peer -->
                 <div class="text-center pt-4">
                     <video id="peer-camera" width="700" height="400" autoplay playsinline
-                        class="center-block vid-frame"></video>
+                        class="center-block vid-frame">
+                    </video>
+                    <h3 class="py-3"><span class="badge badge-primary px-4 py-2" style="border-radius: 10px;"
+                            id="connector_peer">Your peer</span></h3>
                     <h4><span class="badge badge-secondary" id="connected_peer"></span></h4>
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="display-4 pb-4" style="color: #9933CC;"><i class="fas fa-fingerprint"></i>&nbsp;&nbsp;Your secret connection ID</h1>
-                    <p id="peer-id-label" class="lead">Generating...</p>
-                </div>
-            </div>
-            <br>
+        <hr>
+        <div class="my-4 text-center">
+            <button id="call" class="btn btn-info" style="border-radius: 10%;"><span class=" display-2"><i
+                        class="fas fa-phone-alt"></i>
+                </span></button>
         </div>
         <div class="row">
             <div class="w-100">
                 <div class="form-horizontal col-md-8 offset-md-2" id="connection-form">
                     <fieldset>
                         <div class="form-group">
-                            <label for="name" class="w-100 pl-3 control-label">Username (Skip if you wish to be anonymous)</label>
+                            <label for="name" class="w-100 pl-3 bdr-8 control-label">Username (Skip if you wish to be
+                                anonymous)</label>
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" name="name" id="name"
                                     placeholder="Your random username">
                             </div>
                         </div>
                         <div class="form-group mt-4">
-                            <label for="peer_id" class="w-100 pl-3  control-label">Peer ID (Connection ID of your partner)</label>
+                            <label for="peer_id" class="w-100 pl-3 bdr-8 control-label">Peer ID (Connection ID of your
+                                partner)</label>
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" name="peer_id" id="peer_id"
                                     placeholder="Peer ID" autocomplete="off" autocorrect="off" autocapitalize="off"
@@ -120,29 +140,32 @@
                                 empty !
                             </div>
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button id="connect-to-peer-btn" class="btn btn-info"><span><i class="fas fa-link"></i>&nbsp;&nbsp;Connect to Peer</span></button>
+                                <button id="connect-to-peer-btn" class="btn btn-info bdr-8"><span><i
+                                            class="fas fa-link"></i>&nbsp;&nbsp;Connect to Peer</span></button>
                             </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-12">
-                <div id="chat" class="invisible">
-                    <div id="messages-container" class="invisible">
-                        <div class="list-group" id="messages"></div>
-                    </div>
-                    <div id="message-container">
-                        <div class="form-group">
-                            <label class="control-label">Live chat</label>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button id="call" class="btn btn-info">Call</button>
-                                </span>
-                                <input type="text" class="form-control" name="message" id="message"
-                                    placeholder="Type a message ...">
-                                <span class="input-group-btn">
-                                    <button id="send-message" class="btn btn-success">Send Message</button>
-                                </span>
+            <div class="w-100">
+                <div class="col-md-8 form-horizontal offset-md-2 mt-4">
+                    <div id="chat" class="invisible1 pt-4">
+                        <div id="messages-container" class="invisible">
+                            <div class="list-group" id="messages"></div>
+                        </div>
+                        <div id="message-container">
+                            <div class="form-group">
+                                <label class="control-label">Call and live chat</label>
+                                <div class="input-group">
+                                    <!-- <span class="input-group-btn"> -->
+                                    <!-- </span> -->
+                                    <input type="text" class="form-control bdr-8" name="message" id="message"
+                                        placeholder="Type a message ...">
+                                    <span class="input-group- ml-2">
+                                        <button id="send-message" class="btn btn-info bdr-8">Send Message</button>
+                                    </span>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -154,8 +177,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p>This is a final curricular project of ITSS Linux System and Network management course, Hanoi University of Science and Technology, ICT class, term 2021-1</p>
-                    <h5 class="text-secondary">Developed by</h5>
+                    <p>This is a final curricular project of ITSS Linux System and Network management course, Hanoi
+                        University of Science and Technology, ICT class, term 2021-1</p>
+                    <h5 class="text-secondary my-4">Developed by</h5>
                     <p>Trịnh Minh Quang</p>
                     <p>Nguyễn Hoàn Trung</p>
                     <p>Trương Tuấn Nghĩa</p>
