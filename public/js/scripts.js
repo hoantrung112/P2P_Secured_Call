@@ -76,7 +76,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //If peerName is Empty replace it with Anonymous
         if (peerName) {
             document.getElementById('connected_peer').innerHTML = peerName;
-        } else document.getElementById('connected_peer').innerHTML = 'Anonymous';
+        } else {
+            document.getElementById('connected_peer').innerHTML = 'Anonymous';
+        }
     });
 
     //Recieving end
